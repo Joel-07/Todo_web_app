@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Notes4U</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous">
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container m-5 p-2 rounded mx-auto bg-light shadow">
+        <div class="row m-1 p-4">
+            <div class="col">
+                <div class="p-1 h1 text-primary text-center mx-auto display-inline-block">
+                    <u>Notes4U</u>
+                </div>
+            </div>
+        </div>
+        <form action="{{url_for('add_data')}}" method="POST">
+            <div class=container>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Title</label>
+                    <input type="text" name="tname" class="form-control" placeholder="Enter the Title of the task" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                    <textarea type="text" name="desc" class="form-control"
+                        placeholder="Enter the Description of the task" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">ADD</button>
+                <a type="button" href="{{ url_for('del_all')}}" class="btn btn-primary">DELETE ALL</a>
+                </from>
+            </div>
+            <div class=container>
+
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sr No</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for todo in todo %}
+                        <tr>
+                            <th scope="row">{{loop.index}}</th>
+                            <td>{{todo.title}}</td>
+                            <td>{{todo.desc}}</td>
+                            <td><a type="button" href="{{ url_for('upd_one', did=todo._id )}}"
+                                    class="btn btn-primary">UPDATE</a></td>
+                            <td><a type="button" href="{{ url_for('del_one', did=todo._id )}}"
+                                    class="btn btn-primary">DELETE</a></td>
+                        </tr>
+                        {% endfor %}
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+            <div class="p-2 mx-4 border-black-25 border-bottom"></div>
+    </div>
+</body>
+
+</html>
