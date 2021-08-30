@@ -19,13 +19,16 @@
 <body>
 
     <div class="container m-5 p-2 rounded mx-auto bg-light shadow">
+
         <div class="row m-1 p-4">
             <div class="col">
                 <div class="p-1 h1 text-primary text-center mx-auto display-inline-block">
+
                     <u>Notes4U</u>
                 </div>
             </div>
         </div>
+
         {% for todo in todos %}
         <form action="{{ url_for('upd_two',did=todo._id)}}" method="POST">
             <div class=container>
@@ -36,18 +39,15 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                    <textarea name="dname" class="form-control" placeholder="{{todo['desc']}}"
-                     rows="3"></textarea>
+                    <textarea type="text" name="dname" class="form-control"  rows="3">{{todo['desc']}}</textarea>
                 </div>
-                <a href="{{ url_for('upd_two',did=todo._id)}}"><input type="submit"
-                    class="btn btn-primary" value="UPDATE"></a>
+                <a href="{{ url_for('upd_two',did=todo._id)}}"><button type="submit"
+                        class="btn btn-primary">UPDATE</button></a>
+
                 {% endfor %}
-                </from>
-
-
-            </div>
-           
+                </form>
+            </div>      
     </div>
 </body>
-
+    
 </html>
