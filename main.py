@@ -5,9 +5,9 @@ from bson import ObjectId
 
 app = Flask(__name__)
 
-client = MongoClient("mongodb://127.0.0.1:27017")
-db = client.todo_db
-todos = db.todos
+client = MongoClient("mongodb://127.0.0.1:27017")  # host uri
+db = client.todo_db  # Select the database
+todos = db.todos  # Select the collection name
 
 
 @app.route("/basic")
@@ -19,6 +19,8 @@ def home():
 def add_data():
     title = request.form.get('tname')
     desc = request.form.get('desc')
+    # if title=="" and desc=="":
+
     db.todos.insert_one({'title': title, 'desc': desc})
     return redirect(url_for('get_data'))
 
@@ -39,12 +41,10 @@ def upd_one(did):
 def upd_two(did):
     title = request.form.get('tname')
     desc = request.form.get('dname')
-    if title != "":
-        todos.update_one({"_id": ObjectId(f"{did}")}, {
-            "$set": {"title": title}})
-    elif desc != "":
-        todos.update_one({"_id": ObjectId(f"{did}")}, {
-            "$set": {"desc": desc}})
+    todos.update_one({"_id": ObjectId(f"{did}")}, {
+        "$set": {"title": title}})
+    todos.update_one({"_id": ObjectId(f"{did}")}, {
+        "$set": {"desc": desc}})
     return redirect(url_for('get_data'))
 
 
